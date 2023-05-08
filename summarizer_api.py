@@ -20,7 +20,7 @@ logger.add("./backend_logs.log", format=fmt)
 app = FastAPI()
 model = SimpleT5()
 # model.from_pretrained(model_type="t5", model_name="t5-base")
-model.load_model("t5","../../output/content/outputs/simplet5-epoch-2-train-loss-0.924-val-loss-1.4455/", use_gpu=False)
+model.load_model("t5","simplet5-epoch-4-train-loss-0.6005-val-loss-1.6554", use_gpu=False)
 print("Model Loaded")
 
 client = MongoClient("localhost", 27017)

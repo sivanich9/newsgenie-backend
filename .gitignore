@@ -1,0 +1,4 @@
+*.pkl
+*.sav
+*.joblib
+./simplet5-epoch-4-train-loss-0.6005-val-loss-1.6554

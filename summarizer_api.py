@@ -6,6 +6,7 @@ from loguru import logger
 from datetime import datetime
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from database import get_db
 
 import pydantic
 pydantic.json.ENCODERS_BY_TYPE[ObjectId]=str
@@ -104,7 +105,8 @@ def logMessage(type, action, user, message):
 @app.post("/create_article", status_code=status.HTTP_201_CREATED)
 async def create_article(request: Request):
     article = await request.json()
-    article_collection = client["newsgenie"]["articles"]
+    db = get_db("newsgenie")
+    article_collection = db.get_collection("articles")
     result = article_collection.insert_one(article)
     if result.acknowledged:
         logMessage("INFO","create_article", article["user"]["email"], "created article")
@@ -116,7 +118,8 @@ async def create_article(request: Request):
 
 @app.get("/get_articles", status_code=status.HTTP_202_ACCEPTED)
 async def get_articles():
-    article_collection = client["newsgenie"]["articles"]
+    db = get_db("newsgenie")
+    article_collection = db.get_collection("articles")
     articles = []
     for article in article_collection.find():
         articles.append(article)
@@ -128,7 +131,8 @@ async def get_article(request: Request):
     articleId = await request.json()
     print(articleId)
     articleId = articleId["id"]
-    article_collection = client["newsgenie"]["articles"]
+    db = get_db("newsgenie")
+    article_collection = db.get_collection("articles")
     result = article_collection.find_one({"_id": ObjectId(articleId)})
     return {"article": result}
 
@@ -137,7 +141,8 @@ async def get_article(request: Request):
 @app.post("/create_comment", status_code=status.HTTP_201_CREATED)
 async def create_comment(request: Request):
     comment = await request.json()
-    comment_collection = client["newsgenie"]["comments"]
+    db = get_db("newsgenie")
+    comment_collection = db.get_collection("comments")
     result = comment_collection.insert_one(comment)
     if result.acknowledged:
         logMessage("INFO","create_comment", comment["user"]["email"], "added comment")
@@ -152,7 +157,8 @@ async def create_comment(request: Request):
 async def get_comments(request: Request):
     articleId = await request.json()
     articleId = articleId["id"]
-    comment_collection = client["newsgenie"]["comments"]
+    db = get_db("newsgenie")
+    comment_collection = db.get_collection("comments")
     comments = []
     for comment in comment_collection.find({"article_id": articleId}):
         comments.append(comment)
@@ -163,7 +169,8 @@ async def get_comments(request: Request):
 @app.post("/post_visit", status_code=status.HTTP_201_CREATED)
 async def post_visit(request: Request):
     visit = await request.json()
-    visit_collection = client["newsgenie"]["visits"]
+    db = get_db("newgenie")
+    visit_collection = db.get_collection("visits")
     result = visit_collection.insert_one(visit)
     return {"insertion": result.acknowledged}
 
@@ -172,7 +179,8 @@ async def post_visit(request: Request):
 async def get_visits(request: Request):
     userId = await request.json()
     userId = userId["userId"]
-    visit_collection = client["newsgenie"]["visits"]    
+    db = get_db("newgenie")
+    visit_collection = db.get_collection("visits")    
     visits = []
     for visit in visit_collection.find({"user.id" : userId}):
         visits.append(visit)

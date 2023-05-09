@@ -68,7 +68,7 @@ async def root():
     return {"message": "Hello World"}
 
 
-@app.post("/summary")
+@app.post("/summary", status_code=status.HTTP_200_OK)
 async def summarize(newsArticle: NewsArticle):
     newsArticle_to_summarize = "summarize: {}".format(newsArticle)
     newsArticle = model.predict(newsArticle_to_summarize)

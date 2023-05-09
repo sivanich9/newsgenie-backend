@@ -4,9 +4,9 @@
 08/05/2023 17:00:59 ce78d529-ed93-11ed-a8ec-ec5c682c490f INFO create_article hanzoapi1@gmail.com created article
 08/05/2023 17:05:33 71795aaf-ed94-11ed-a8ec-ec5c682c490f INFO create_article hanzoapi1@gmail.com created article
 08/05/2023 17:05:45 78bf0120-ed94-11ed-8720-ec5c682c490f INFO summarize_article hanzoapi1@gmail.com summarized article
-08/05/2023 17:16:56 08acd57b-ed96-11ed-a8ec-ec5c682c490f INFO logout user logging out
+08/05/2023 17:16:56 08acd57b-ed96-11ed-a8ec-ec5c682c490f INFO logout hanzoapi1@gmail.com logging out
 08/05/2023 17:17:06 0e5d3ad0-ed96-11ed-8720-ec5c682c490f INFO login hanzoapi1@gmail.com logged in
-08/05/2023 17:33:00 477ac250-ed98-11ed-8199-ec5c682c490f INFO logout user logging out
+08/05/2023 17:33:00 477ac250-ed98-11ed-8199-ec5c682c490f INFO logout hanzoapi1@gmail.com logging out
 08/05/2023 17:44:16 da79151f-ed99-11ed-a8ec-ec5c682c490f INFO login hanzoapi1@gmail.com logged in
 08/05/2023 17:44:30 e29d039c-ed99-11ed-8720-ec5c682c490f INFO summarize_article hanzoapi1@gmail.com summarized article
 08/05/2023 17:44:51 ef54a83a-ed99-11ed-8199-ec5c682c490f INFO create_comment hanzoapi1@gmail.com added comment
@@ -28,3 +28,7 @@
 08/05/2023 22:25:33 25bb2cc9-edc1-11ed-a8ec-ec5c682c490f INFO create_article sivani@gmail.com created article
 08/05/2023 22:25:48 2edc5c05-edc1-11ed-a8ec-ec5c682c490f INFO create_article sivani@gmail.com created article
 08/05/2023 22:27:10 5fa1c6a2-edc1-11ed-a8ec-ec5c682c490f INFO create_article sivani@gmail.com created article
+09/05/2023 09:16:03 05825015-ee1c-11ed-a8ec-ec5c682c490f INFO create_article sivani@gmail.com created article
+09/05/2023 09:17:03 29273882-ee1c-11ed-a8ec-ec5c682c490f INFO create_article sivani@gmail.com created article
+09/05/2023 09:17:58 49c63fd0-ee1c-11ed-a8ec-ec5c682c490f INFO create_article sivani@gmail.com created article
+09/05/2023 09:17:58 49c9b4b7-ee1c-11ed-8720-ec5c682c490f INFO create_comment sivani@gmail.com added comment

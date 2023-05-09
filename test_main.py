@@ -2,9 +2,11 @@ from fastapi.testclient import TestClient
 from summarizer_api import app
 from bson.objectid import ObjectId
 
+
 import pytest
 import mongomock
 import json
+import datetime
 
 
 client = TestClient(app)
@@ -22,6 +24,8 @@ def mongo_mock(monkeypatch):
     client = mongomock.MongoClient()
     db = client.get_database("newsgenieTest")
     articles = db.get_collection("articles")
+    comments = db.get_collection("comments")
+
     article_data = {
         "_id": ObjectId("5e63c3a5e4232e4cd0274ac2"),
         "user": {
@@ -34,6 +38,21 @@ def mongo_mock(monkeypatch):
         "rating": 0
     }
     articles.insert_one(article_data)
+
+
+    comments_data = {
+        "_id": ObjectId("5e63c3a5e4132eccd02d4ae2"),
+        "user": {
+            "id": "u1",
+            "email": "hanzoapi1@gmail.com"
+        },
+        "comment": "test_comment",
+        "article_id": "5e63c3a5e4232e4cd0274ac2",
+        "created_at": str(datetime.datetime.now())
+    }
+    comments.insert_one(comments_data)
+    
+
 
     def fake_db(dbName):
         return db
@@ -54,15 +73,27 @@ def test_get_articles(mongo_mock):
 
 
 article_data = {
-        "user": {
-            "id": "u2",
-            "email": "sivani@gmail.com"
-        },
-        "headline": "sivani_headline",
-        "description": "sivani_desc",
-        "genre": "test",
-        "rating": 0
-    }
+    "user": {
+        "id": "u2",
+        "email": "sivani@gmail.com"
+    },
+    "headline": "sivani_headline",
+    "description": "sivani_desc",
+    "genre": "test",
+    "rating": 0
+}
+
+
+comment_data = {
+    "user": {
+        "id": "u2",
+        "email": "sivani@gmail.com"
+    },
+    "comment": "sivani_comment",
+    "article_id": "5e63c3a5e4132eccd02d4ae2",
+    "created_at": str(datetime.datetime.now())
+}
+
 
 
 def test_create_article(mongo_mock):
@@ -81,3 +112,18 @@ def test_get_article(mongo_mock):
     assert article["headline"] == "test_headline"
     assert article["description"] == "test_desc"
     assert article["genre"] == "test"
+
+
+def test_get_comments(mongo_mock):
+    response = client.post("/get_comments", data=json.dumps({"id":"5e63c3a5e4232e4cd0274ac2"}))
+    assert response.status_code == 202
+    comments = response.json()["comments"]
+    assert comments[0]["user"]["id"] == "u1"
+    assert comments[0]["user"]["email"] == "hanzoapi1@gmail.com"
+    assert comments[0]["comment"] == "test_comment"
+
+
+def test_create_comment(mongo_mock):
+    response = client.post("/create_comment", data=json.dumps(comment_data))
+    assert response.status_code == 201
+    assert response.json()["insertion"] == True

@@ -1,5 +1,6 @@
 import pymongo
 
+# enable the comment to provide access to mongo cloud
 # client = pymongo.MongoClient("mongodb+srv://hanzo:<oassword>@cluster0.13jih.mongodb.net/?retryWrites=true&w=majority")
 
 def get_db(db_name:str):

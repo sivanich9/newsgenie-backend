@@ -1,7 +1,7 @@
 import pymongo
 
 def get_db(db_name:str):
-    client = pymongo.MongoClient("localhost", 27017)
+    client = pymongo.MongoClient("mongodb:27017")
     db = client.test
     db = client.get_database(db_name)
     # try:

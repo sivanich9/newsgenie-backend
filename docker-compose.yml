@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  frontend:
+    image : sivani4/newsgeniefrontend:latest
+    container_name : newsgeniefrontend
+    volumes:
+      - frontend-volume:/app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend  
+     
+
+  backend:
+    image : sivani4/newsgeniebackend:latest
+    container_name : newsgeniebackend
+    volumes:
+      - backend-volume:/.cache
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017 
+    depends_on:
+      - mongodb
+
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    volumes:
+      - mongodb-volume:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  frontend-volume:
+  backend-volume:
+  mongodb-volume:

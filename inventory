@@ -1,0 +1,2 @@
+#192.168.225.84 ansible_user=maninandadeep ansible_password=Nandu@2001
+localhost ansible_user=sivani ansible_connection=local 

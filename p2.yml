@@ -1,0 +1,13 @@
+---
+- name: "Deploying software"
+  hosts: "all"
+  tasks:
+    - name: "copy docker-compose"
+      copy:
+          src: docker-compose.yml
+          dest: docker-compose.yml
+          mode: '0644'
+    - name: "Pull docker images"
+      command: "docker-compose -f docker-compose.yml pull"
+    - name: "Start docker compose"
+      command: "docker-compose -f docker-compose.yml up -d"

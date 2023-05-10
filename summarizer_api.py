@@ -24,7 +24,7 @@ model = SimpleT5()
 model.load_model("t5","simplet5-epoch-4-train-loss-0.6005-val-loss-1.6554", use_gpu=False)
 print("Model Loaded")
 
-client = MongoClient("localhost", 27017)
+# client = MongoClient("localhost", 27017)
 print("Connected to MongoDB")
 
 origins = ["*"]
